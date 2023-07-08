@@ -44,20 +44,21 @@ class _HomePageScreenState extends State<HomePageScreen> {
             ),
             TextButton(
               child: Text('Yes'),
-              onPressed: () {
+              onPressed: () async {
                 Navigator.pop(context);
                 // Close the dialog
-                deleteProductData(id: id);
+                await deleteProductData(id: id);
 
                 setState(() {
                   isLoading = true;
-                  getDataProduct.clear();
-                  getProductData();
                 });
+                getDataProduct.clear();
                 getProductData().then((value) {
-                  setState(() {
-                    isLoading = false;
-                  });
+                  for (var item in value) {
+                    getDataProduct.add(GetDataProduct.fromJson(item));
+                  }
+                  isLoading = false;
+                  setState(() {});
                 });
               },
             ),
