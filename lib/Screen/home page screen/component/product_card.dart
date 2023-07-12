@@ -61,7 +61,7 @@ class PrductCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Spacer(),
+                const Spacer(),
                 OutlinedButton(
                     style:
                         ElevatedButton.styleFrom(backgroundColor: Colors.white),

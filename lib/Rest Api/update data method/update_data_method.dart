@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:rest_api/Rest%20Api/url_link.dart';
+import 'package:rest_api/Utils/toast_method.dart';
 
-Future updateProductData(
+Future updateDataProduct(context,
     {required imgUrl,
-    required prdoductCode,
+    required productCode,
     required productName,
     required qty,
     required totlaPrice,
@@ -15,7 +16,7 @@ Future updateProductData(
   final body = {
     "_id": id,
     "Img": imgUrl,
-    "ProductCode": prdoductCode,
+    "ProductCode": productCode,
     "ProductName": productName,
     "Qty": qty,
     "TotalPrice": totlaPrice,
@@ -23,5 +24,7 @@ Future updateProductData(
   };
   final response =
       await http.post(uri, body: json.encode(body), headers: header);
-  if (response.statusCode == 200) {}
+  if (response.statusCode == 200) {
+    displaySuccessMotionToast(context, desc: 'Update Successfully');
+  }
 }

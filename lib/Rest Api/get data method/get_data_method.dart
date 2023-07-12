@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:rest_api/Rest%20Api/url_link.dart';
 import 'package:http/http.dart' as http;
 
-Future getProductData() async {
+Future fetchDataProduct() async {
   final url = Uri.parse(readProductUrl);
   final response = await http.get(url, headers: header);
 
