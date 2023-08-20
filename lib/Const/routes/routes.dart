@@ -8,5 +8,6 @@ Map<String, WidgetBuilder> get routes {
   return {
     RouteName.homePage: (context) => const HomePageScreen(),
     RouteName.createScreenPage: (context) => const CreateProductScreen(),
+    // RouteName.detailsScreenPage: (context) =>   DetailsScreen(),
   };
 }

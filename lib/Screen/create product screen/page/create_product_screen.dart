@@ -21,110 +21,100 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
   final TextEditingController productImageController = TextEditingController();
   final TextEditingController productPriceController = TextEditingController();
   final TextEditingController productQtyController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+
+  createProduct()async{
+   var response = await createDataProduct(context,
+        code: productCodeController.text.trim(),
+        img: productImageController.text.trim(),
+        name: productNameController.text.trim(),
+        price: productPriceController.text.trim(),
+        qty: productQtyController.text.trim());
+  }
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        //when back button press again navigate homePage
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Create Data'),
+      ),
+      body: Form(
 
-        return true;
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Create Data'),
-        ),
-        body: Form(
-          key: formKey,
-          child: ListView(
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(),
-            children: [
-              const SizedBox(height: 20),
-              CustomTextField(
-                validator: validateName,
-                controller: productNameController,
-                hintText: 'Enter Product Name',
-                labelText: ' Product Name',
-              ),
-              CustomTextField(
-                controller: productCodeController,
-                hintText: 'Enter Product Code',
-                labelText: 'Product Code',
-              ),
-              CustomTextField(
-                validator: validateUrl,
-                controller: productImageController,
-                hintText: 'Enter image url link',
-                labelText: 'Image',
-              ),
-              CustomTextField(
-                controller: productPriceController,
-                hintText: 'Enter Unit Price',
-                labelText: 'Unit Price',
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 02, color: Colors.grey),
-                      color: Colors.grey.shade300),
-                  child: DropdownButton(
-                    hint: const Text('Select Qty'),
-                    value: productQtyController.text,
-                    isExpanded: true,
-                    underline: Container(),
-                    items: const [
-                      DropdownMenuItem(
-                        value: '',
-                        child: Text('Select Qty'),
-                      ),
-                      DropdownMenuItem(
-                        value: '1',
-                        child: Text('1 Pcs'),
-                      ),
-                      DropdownMenuItem(
-                        value: '2',
-                        child: Text('2 Pcs'),
-                      ),
-                      DropdownMenuItem(
-                        value: '3',
-                        child: Text('3 Pcs'),
-                      ),
-                      DropdownMenuItem(
-                        value: '4',
-                        child: Text('4 Pcs'),
-                      ),
-                    ],
-                    onChanged: (value) {
-                      productQtyController.text = value!;
-                      if (mounted) {
-                        setState(() {});
-                      }
-                    },
-                  ),
+        child: ListView(
+          shrinkWrap: true,
+          physics: const BouncingScrollPhysics(),
+          children: [
+            const SizedBox(height: 20),
+            CustomTextField(
+              validator: validateName,
+              controller: productNameController,
+              hintText: 'Enter Product Name',
+              labelText: ' Product Name',
+            ),
+            CustomTextField(
+              controller: productCodeController,
+              hintText: 'Enter Product Code',
+              labelText: 'Product Code',
+            ),
+            CustomTextField(
+              validator: validateUrl,
+              controller: productImageController,
+              hintText: 'Enter image url link',
+              labelText: 'Image',
+            ),
+            CustomTextField(
+              controller: productPriceController,
+              hintText: 'Enter Unit Price',
+              labelText: 'Unit Price',
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(width: 02, color: Colors.grey),
+                    color: Colors.grey.shade300),
+                child: DropdownButton(
+                  hint: const Text('Select Qty'),
+                  value:'',
+                  isExpanded: true,
+                  underline: Container(),
+                  items: const [
+                    DropdownMenuItem(
+                      value: '',
+                      child: Text('Select Qty'),
+                    ),
+                    DropdownMenuItem(
+                      value: '1',
+                      child: Text('1 Pcs'),
+                    ),
+                    DropdownMenuItem(
+                      value: '2',
+                      child: Text('2 Pcs'),
+                    ),
+                    DropdownMenuItem(
+                      value: '3',
+                      child: Text('3 Pcs'),
+                    ),
+                    DropdownMenuItem(
+                      value: '4',
+                      child: Text('4 Pcs'),
+                    ),
+                  ],
+                  onChanged: (value) {
+                    productQtyController.text = value!;
+                    if (mounted) {
+                      setState(() {});
+                    }
+                  },
                 ),
               ),
-              const SizedBox(height: 20),
-              CustomButton(
-                text: 'Create Product',
-                onTap: () {
-                  if (formKey.currentState!.validate()) {
-                    createDataProduct(context,
-                        code: productCodeController.text.trim(),
-                        img: productImageController.text.trim(),
-                        name: productNameController.text.trim(),
-                        price: productPriceController.text.trim(),
-                        qty: productQtyController.text.trim());
-                    pushOffAllNavigate(
-                        context: context, screenName: RouteName.homePage);
-                  } else {
-                    displayErrorMotionToast(context);
-                  }
-                },
-              )
-            ],
-          ),
+            ),
+            const SizedBox(height: 20),
+            CustomButton(
+              text: 'Create Product',
+              onTap: () {
+
+              },
+            )
+          ],
         ),
       ),
     );

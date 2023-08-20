@@ -4,14 +4,13 @@ import 'package:rest_api/Rest%20Api/url_link.dart';
 import 'package:http/http.dart' as http;
 
 Future fetchDataProduct() async {
-  final url = Uri.parse(readProductUrl);
-  final response = await http.get(url, headers: header);
+  var url = readProductUrl;
+  var uri = Uri.parse(url);
+  var response = await http.get(uri, headers: header);
 
-  final data = jsonDecode(response.body);
+  var responseBody = jsonDecode(response.body);
 
-  if (response.statusCode == 200 && data['status'] == 'success') {
-    return data['data'];
-  } else {
-    throw Exception();
-  }
+  if (response.statusCode == 200 && responseBody['status'] == 'success') {
+    return responseBody['data'];
+  }  return [];
 }

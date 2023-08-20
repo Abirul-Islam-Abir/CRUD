@@ -35,8 +35,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
   void initState() {
     // productQtyController = widget.getDataProduct.qty!;
     super.initState();
-  }
-
+  } 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

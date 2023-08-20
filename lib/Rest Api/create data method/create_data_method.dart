@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:rest_api/Rest%20Api/url_link.dart';
-import 'package:rest_api/Utils/toast_method.dart';
 
 Future createDataProduct(context,
     {required name,
@@ -22,8 +21,7 @@ Future createDataProduct(context,
   });
   final response = await http.post(uri, body: body, headers: header);
   if (response.statusCode == 200) {
-    displaySuccessMotionToast(context, desc: 'Product Created Successfully');
+    final decodedResponse = jsonDecode(response.body);
+    return decodedResponse;
   }
-  final decodedResponse = jsonDecode(response.body);
-  return decodedResponse;
 }

@@ -1,44 +1,44 @@
 class GetDataProduct {
   String? sId;
-  String? productName;
-  String? productCode;
+  String? createdDate;
   String? img;
-  String? unitPrice;
+  String? productCode;
+  String? productName;
   String? qty;
   String? totalPrice;
-  String? createdDate;
+  String? unitPrice;
 
   GetDataProduct(
       {this.sId,
-      this.productName,
-      this.productCode,
-      this.img,
-      this.unitPrice,
-      this.qty,
-      this.totalPrice,
-      this.createdDate});
+        this.createdDate,
+        this.img,
+        this.productCode,
+        this.productName,
+        this.qty,
+        this.totalPrice,
+        this.unitPrice});
 
   GetDataProduct.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
-    productName = json['ProductName'];
-    productCode = json['ProductCode'];
+    createdDate = json['CreatedDate'];
     img = json['Img'];
-    unitPrice = json['UnitPrice'];
+    productCode = json['ProductCode'];
+    productName = json['ProductName'];
     qty = json['Qty'];
     totalPrice = json['TotalPrice'];
-    createdDate = json['CreatedDate'];
+    unitPrice = json['UnitPrice'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['_id'] = sId;
-    data['ProductName'] = productName;
-    data['ProductCode'] = productCode;
-    data['Img'] = img;
-    data['UnitPrice'] = unitPrice;
-    data['Qty'] = qty;
-    data['TotalPrice'] = totalPrice;
-    data['CreatedDate'] = createdDate;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
+    data['CreatedDate'] = this.createdDate;
+    data['Img'] = this.img;
+    data['ProductCode'] = this.productCode;
+    data['ProductName'] = this.productName;
+    data['Qty'] = this.qty;
+    data['TotalPrice'] = this.totalPrice;
+    data['UnitPrice'] = this.unitPrice;
     return data;
   }
 }
